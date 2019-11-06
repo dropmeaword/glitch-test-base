@@ -1,0 +1,16 @@
+#N canvas 678 114 482 356 12;
+#X obj 48 298 udpsend;
+#X msg 141 251 disconnect;
+#X obj 48 221 packOSC;
+#X msg 141 226 connect 127.0.0.1 8000;
+#X obj 141 186 loadbang;
+#X msg 48 21 send /shape circle red;
+#X msg 60 49 send /shape rect yellow;
+#X msg 68 76 send /shape heart purple;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 0;
+#X connect 4 0 3 0;
+#X connect 5 0 2 0;
+#X connect 6 0 2 0;
+#X connect 7 0 2 0;

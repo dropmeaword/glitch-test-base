@@ -1,0 +1,96 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- ********************************************************************* -->
+  <!-- ** BEGIN includes for pantera frameworks                           ** -->
+  <!-- ********************************************************************* -->
+  <!-- include core p5js  -->
+  <script language="javascript" type="text/javascript" src="build/libs/p5js/p5.js"></script>
+  <!-- include extra p5js libraries -->
+  <script language="javascript" src="build/libs/p5js/p5.dom.js"></script>
+  <script language="javascript" src="build/libs/p5js/p5.sound.js"></script>
+  <!-- include chroma.js -->
+  <script language="javascript" src="build/libs/chromajs/chroma.min.js"></script>
+  <!-- include dat.gui -->
+  <script language="javascript" src="build/libs/dat.gui/dat.gui.js"></script>
+  <!-- include socket.io -->
+  <script language="javascript" src="build/libs/socket.io/socket.io.js"></script>
+  <!-- include javascript-state-machine -->
+  <script language="javascript" src="build/libs/javascript-state-machine/state-machine.min.js"></script>
+  <!-- ********************************************************************* -->
+  <!-- ** END includes for pantera frameworks                             ** -->
+  <!-- ********************************************************************* -->
+
+  <!-- include core pantera stuff -->
+  <script language="javascript" type="module" src="build/pantera/pantera.bundle.js"></script>
+
+  <script language="javascript" type="text/javascript" src="inc/hyperpong/jquery-2.1.4.min.js"></script>
+  <link rel="stylesheet" href="css/core/main.css">
+</head>
+
+<body>
+    <div id="container">
+    </div>
+    <script>
+      // we need a handle to the socket to send our osc values
+      var socket;
+      var isConnected;
+      var shape = 'none';
+      var col = 255;
+      var osc = null;
+
+      // proposal for OSC client config and event handlers
+      var osculate = {
+        rx_port: 8000,
+        tx_port: 9000,
+        handlers:
+        {
+          '/shape/triangle'   : (payload) => { console.log("triangle received"); },
+          '/shape/circle'     : (payload) => { console.log("circle received"); },
+          '/shape/square'     : (payload) => { console.log("square received"); },
+          '/shape/heart'      : (payload) => { console.log("heart received"); },
+        }
+      };
+
+      function setup() {
+        createCanvas(800, 400);
+        osc = new OSC(8000, 9000);
+      }
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+        
+      function heart(x, y, size) {
+        beginShape();
+          vertex(x, y);
+          bezierVertex(x - size / 2, y - size / 2, x - size, y + size / 3, x, y + size);
+          bezierVertex(x + size, y + size / 3, x + size / 2, y - size / 2, x, y);
+        endShape(CLOSE);
+      }
+
+      function draw() {
+        background(0);
+        fill(255);
+        text("shape: "+shape, 20, 20);
+        push();
+          noStroke();
+          fill(col);
+          translate(width/2, height/2);
+          if(shape == 'circle') {
+            ellipse(0, 0, 300, 300);
+          }
+
+          if(shape == 'rect') {
+            rectMode(CENTER);
+            rect(0, 0, 300, 100);
+          }
+
+          if(shape == 'heart') {
+            heart(0, -300/2, 300);
+          }
+        pop();
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+
+  <!-- include core p5js  -->
+  <script language="javascript" type="text/javascript" src="build/libs/p5js/p5.js"></script>
+  <link rel="stylesheet" href="css/core/main.css">
+  <link rel="stylesheet" href="css/logo/main.css">
+
+  <script language="javascript" type="module" src="build/pantera/pantera.bundle.js"></script>
+
+</head>
+
+<body>
+    <div id="container">
+    </div>
+
+    <script>
+      function setup() {
+        // create full-window canvas
+        let cnvs = createCanvas(windowWidth, windowHeight);
+        cnvs.parent('container');
+      }
+
+      function draw() {
+        background(0);
+        noStroke();
+        fill(255);
+        ellipse(width/2, height/2, 40, 40);
+      }
+    </script>
+
+</body>
+</html>

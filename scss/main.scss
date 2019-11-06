@@ -1,0 +1,44 @@
+@import "colors";
+
+*, html, body {
+  padding: 0;
+  margin: 0; 
+}
+
+/** --------------------------------------------------------------------- **/
+/** MCU status bar                                                        **/
+/** --------------------------------------------------------------------- **/
+#statusbar {
+    /* flex: 0 0 auto; */
+    background-color: $mcu-bar-bg;
+    bottom: 0;
+    box-shadow: 0 -1px 0px $mcu-bar-shadow;
+    color: $mcu-bar-fg;
+    font: 11px Arial, sans-serif;
+    left: 0;
+    margin: 0;
+    padding: 4px 36px 4px 12;
+    position: fixed;
+    right: 0;
+    text-align: left;
+    text-transform: none;
+    z-index: 99999;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+#statusbar div {
+  display: inline;
+  margin: 0 12px 0 12px;
+}
+
+.mcu-status {
+  /* font-size: 1.5em; */
+}
+
+.available {
+  color: $mcu-online;
+}
+
+.unavailable {
+  color: $mcu-offline;
+}

@@ -1,0 +1,72 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- ********************************************************************* -->
+  <!-- ** BEGIN includes for pantera frameworks                           ** -->
+  <!-- ********************************************************************* -->
+  <!-- include core p5js  -->
+  <script language="javascript" type="text/javascript" src="build/libs/p5js/p5.js"></script>
+  <!-- include extra p5js libraries -->
+  <script language="javascript" src="build/libs/p5js/p5.dom.js"></script>
+  <script language="javascript" src="build/libs/p5js/p5.sound.js"></script>
+  <!-- include chroma.js -->
+  <script language="javascript" src="build/libs/chromajs/chroma.min.js"></script>
+  <!-- include dat.gui -->
+  <script language="javascript" src="build/libs/dat.gui/dat.gui.js"></script>
+  <!-- ********************************************************************* -->
+  <!-- ** END includes for pantera frameworks                             ** -->
+  <!-- ********************************************************************* -->
+
+  <!-- include core pantera stuff -->
+  <script language="javascript" type="module" src="build/pantera/pantera.bundle.js"></script>
+
+  <script language="javascript" type="text/javascript" src="inc/hyperpong/hyperpong.js"></script>
+  <script language="javascript" type="text/javascript" src="inc/hyperpong/jquery-2.1.4.min.js"></script>
+  <script language="javascript" type="text/javascript" src="inc/hyperpong/jquery.scannerdetection.js"></script>
+  <link rel="stylesheet" href="css/core/main.css">
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Aldrich|Biryani:600|Rajdhani:600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="container">
+    </div>
+    <script>
+      $(document).scannerDetection({
+        timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+        startChar: [120], // Prefix character for the cabled scanner (OPL6845R)
+        endChar: [13], // be sure the scan is complete if key 13 (enter) is detected
+        avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
+        onComplete: function(barcode, qty) {
+          console.log("Barcode detected: " + barcode);
+          // 000000000017 player 1
+          // 000000000024 player 2
+          Hyperpong.hitPuck( barcode.trim() );
+        } // main callback function	
+      });
+
+      function preload() {
+        Hyperpong.preload();
+      }
+
+      function setup() {
+        // create full-window canvas
+        let cnvs = createCanvas(windowWidth, windowHeight);
+        cnvs.parent('container');
+        
+        Hyperpong.init();
+        //rebar.hide();
+      }
+
+      // resize canvas if window is resized
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+        
+      function draw() {
+        Hyperpong.update();
+        Hyperpong.draw();
+      }
+    </script>
+</body>
+</html>

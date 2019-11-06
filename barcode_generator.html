@@ -1,0 +1,61 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- ********************************************************************* -->
+  <!-- ** BEGIN includes for pantera frameworks                           ** -->
+  <!-- ********************************************************************* -->
+  <!-- include core p5js  -->
+  <script language="javascript" type="text/javascript" src="build/libs/p5js/p5.js"></script>
+  <!-- include extra p5js libraries -->
+  <script language="javascript" src="build/libs/p5js/p5.dom.js"></script>
+  <script language="javascript" src="build/libs/p5js/p5.sound.js"></script>
+  <script language="javascript" src="build/libs/p5js/p5.serialport.js"></script>
+  <script language="javascript" src="build/libs/p5js/p5.speech.js"></script>
+  <!-- include chroma.js -->
+  <script language="javascript" src="build/libs/chromajs/chroma.min.js"></script>
+  <!-- <script language="javascript" src="scripts/lib/jsbarcode/JsBarcode.code128.min.js"></script> -->
+  <!-- include dat.gui -->
+  <script language="javascript" src="build/libs/dat.gui/dat.gui.js"></script>
+  <!-- ********************************************************************* -->
+  <!-- ** END includes for pantera frameworks                             ** -->
+  <!-- ********************************************************************* -->
+
+  <!-- include core pantera stuff -->
+  <script language="javascript" type="text/javascript" src="build/pantera.js"></script>
+  <script language="javascript" src="inc/barcode/barcodejs/JsBarcode.all.min.js"></script>
+
+  <link rel="stylesheet" href="css/core/main.css">
+</head>
+
+<body>
+    <div id="container">
+        <svg id="barcode-p1"
+            jsbarcode-format="upc"
+            jsbarcode-value="00000000001"
+            jsbarcode-textmargin="0"
+            jsbarcode-fontoptions="bold">
+        </svg>
+        <svg id="barcode-p2"
+            jsbarcode-format="upc"
+            jsbarcode-value="00000000002"
+            jsbarcode-textmargin="0"
+            jsbarcode-fontoptions="bold">
+        </svg>
+        <svg id="barcode-p3"></svg>
+        <svg id="barcode-p4"></svg>
+    </div>
+    <script>
+        JsBarcode("#barcode-p1").init();
+        JsBarcode("#barcode-p2").init();
+
+        JsBarcode("#barcode-p3")
+            .EAN5("10003", {height: 85, textPosition: "top", fontSize: 16})
+            .render();
+
+        JsBarcode("#barcode-p4")
+            .EAN5("10004", {height: 85, textPosition: "top", fontSize: 16})
+            .render();
+
+  </script>
+</body>
+</html>
